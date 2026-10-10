@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="400" height="230" preserveAspectRatio="xMinYMin meet" viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="400" height="230"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-230)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="80" y="36" width="242" height="141" rx="12" ry="12" style="stroke: none; stroke-linecap: butt; stroke-width: 1.2; fill: rgb(42%,15%,85%); fill-rule: evenodd;"/>
+			<rect x="96" y="164" width="95" height="25" rx="8" ry="8" style="stroke: none; stroke-linecap: butt; stroke-width: 1.2; fill: rgb(42%,15%,85%); fill-rule: evenodd;"/>
+			<rect x="132" y="62" width="150" height="130" rx="6" ry="6" style="stroke: rgb(78%,74%,84%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(93%,90%,98%); fill-rule: evenodd;"/>
+			<rect x="143" y="76" width="150" height="130" rx="6" ry="6" style="stroke: rgb(78%,74%,84%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(93%,90%,98%); fill-rule: evenodd;"/>
+			<rect x="154" y="90" width="150" height="130" rx="6" ry="6" style="stroke: rgb(78%,74%,84%); stroke-linecap: butt; stroke-width: 1.2; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<rect x="268" y="133" width="28" height="70" rx="3" ry="3" style="stroke: none; stroke-linecap: butt; stroke-width: 1.2; fill: rgb(85%,96%,35%); fill-rule: evenodd;"/>
+		</g>
+	</g>
+</svg>

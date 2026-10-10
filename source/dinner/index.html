@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+
+<title>Лид-магнит «Мам, а что на ужин?»</title>
+<style>
+  @page{ size:1080px 1920px; margin:0; }
+  :root{
+    --bg:#F5F5DC;
+    --bg2:#EFEAD3;
+    --ink:#333333;
+    --ink2:#4A4A42;
+    --accent:#C67B5C;
+    --accent-dark:#B06A4B;
+    --card:#FFFDF4;
+    --line:#E1D9BB;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:var(--bg); }
+  .page{
+    position:relative;
+    width:1080px;
+    height:1920px;
+    background:var(--bg);
+    color:var(--ink);
+    padding:64px 64px 70px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    page-break-after:always;
+  }
+  .page:last-child{ page-break-after:auto; }
+
+  /* ---------- типографика ---------- */
+  .kicker{
+    font-family:'Montserrat',Arial,sans-serif;
+    font-weight:700;
+    font-size:29px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:20px;
+  }
+  .kicker::before{ content:''; width:54px; height:6px; border-radius:3px; background:var(--accent); display:inline-block; flex:none; }
+  h1{
+    font-family:'Montserrat',Arial,sans-serif;
+    font-weight:700;
+    font-size:88px;
+    line-height:1.16;
+    letter-spacing:-1px;
+  }
+  h2{
+    font-family:'Montserrat',Arial,sans-serif;
+    font-weight:700;
+    font-size:74px;
+    line-height:1.18;
+    letter-spacing:-0.5px;
+  }
+  p{
+    font-family:'Roboto',Arial,sans-serif;
+    font-size:38px;
+    line-height:1.55;
+    font-weight:400;
+    color:var(--ink);
+  }
+  b, strong{ font-weight:700; }
+  .accent{ color:var(--accent-dark); }
+
+  /* ---------- фото ---------- */
+  .photo{
+    width:100%;
+    object-fit:cover;
+    border-radius:38px;
+    box-shadow:0 18px 44px rgba(90,60,30,.16);
+    display:block;
+  }
+  .photo-wrap{ position:relative; }
+
+  /* =========================================================
+     СТРАНИЦА 1 — ОБЛОЖКА
+     ========================================================= */
+  .cover .kicker{ justify-content:center; }
+  .cover .kicker::before{ display:none; }
+  .cover .kicker::after{ content:''; width:54px; height:6px; border-radius:3px; background:var(--accent); display:inline-block; }
+  .cover{
+    align-items:center;
+    text-align:center;
+    justify-content:flex-start;
+    padding-top:96px;
+  }
+  .cover h1{
+    font-size:86px;
+    margin:6px 0 0;
+  }
+  .cover h1 .quo{ color:var(--accent-dark); }
+  .cover .sub{
+    font-family:'Roboto',Arial,sans-serif;
+    font-size:40px;
+    line-height:1.5;
+    margin-top:38px;
+    color:var(--ink2);
+  }
+  .cover .ring{
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    border:3px dashed var(--accent);
+    opacity:.35;
+    left:-220px;
+    top:420px;
+    pointer-events:none;
+  }
+  .cover .photo{
+    width:880px;
+    height:516px;
+    border-radius:44px;
+    margin:56px auto 0;
+  }
+  .cover-badge{
+    font-family:'Montserrat',Arial,sans-serif;
+    font-weight:700;
+    font-size:28px;
+    letter-spacing:2px;
+    color:#fff;
+    background:var(--accent);
+    padding:16px 34px;
+    border-radius:60px;
+    margin-top:44px;
+    box-shadow:0 10px 26px rgba(198,123,92,.35);
+  }
+  .cover .soft{
+    position:absolute;
+    right:-160px;
+    top:1120px;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:var(--bg2);
+    z-index:0;
+  }
+  .cover > *{ position:relative; z-index:1; }
+
+  /* =========================================================
+     СТРАНИЦА 2 — ПРОБЛЕМА
+     ========================================================= */
+  .prob .photo{ height:560px; margin:34px 0 40px; }
+  .prob p + p{ margin-top:30px; }
+  .prob .accent{ font-weight:700; }
+
+  /* =========================================================
+     СТРАНИЦА 3 — ЧЕК-ЛИСТ
+     ========================================================= */
+  .chk .photo{ height:286px; margin:24px 0 30px; }
+  .chk .intro{
+    font-family:'Roboto',Arial,sans-serif;
+    font-size:40px;
+    color:var(--ink2);
+    line-height:1.4;
+    margin-bottom:30px;
+  }
+  .card{
+    background:var(--card);
+    border-radius:30px;
+    padding:32px 38px 34px;
+    border-left:10px solid var(--accent);
+    box-shadow:0 10px 30px rgba(90,60,30,.08);
+    margin-bottom:24px;
+  }
+  .card .q{
+    font-family:'Montserrat',Arial,sans-serif;
+    font-weight:700;
+    font-size:41px;
+    line-height:1.2;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:16px;
+  }
+  .card .q .ok{
+    width:66px;
+    height:66px;
+    flex:none;
+    border-radius:50%;
+    background:#E9E1C2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+  }
+  .card .a{
+    font-family:'Roboto',Arial,sans-serif;
+    font-weight:400;
+    font-size:35px;
+    line-height:1.52;
+    color:var(--ink2);
+    padding-left:84px;
+  }
+
+  /* =========================================================
+     СТРАНИЦА 4 — РЕЗУЛЬТАТ
+     ========================================================= */
+  .res .photo{ height:600px; margin:36px 0 42px; }
+  .res p + p{ margin-top:28px; }
+  .res p b{ color:var(--accent-dark); }
+  .res .note{
+    margin-top:auto;
+    display:flex;
+    align-items:center;
+    gap:22px;
+    background:var(--card);
+    border-radius:26px;
+    padding:28px 36px;
+    box-shadow:0 10px 30px rgba(90,60,30,.08);
+  }
+  .res .note .ic{ font-size:54px; }
+  .res .note p{ font-size:34px; line-height:1.45; color:var(--ink2); }
+
+  /* =========================================================
+     СТРАНИЦА 5 — ФОРМУЛА
+     ========================================================= */
+  .form .photo{ height:360px; margin:52px 0 30px; }
+  .form .intro{
+    font-family:'Roboto',Arial,sans-serif;
+    font-size:40px;
+    color:var(--ink2);
+    line-height:1.45;
+    margin-bottom:28px;
+  }
+  .frow{
+    display:flex;
+    align-items:flex-start;
+    gap:24px;
+    background:var(--card);
+    border-radius:26px;
+    padding:27px 34px;
+    margin-bottom:22px;
+    box-shadow:0 10px 30px rgba(90,60,30,.08);
+  }
+  .frow .ic{
+    width:88px;
+    height:88px;
+    flex:none;
+    border-radius:50%;
+    background:#F0E6D2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
+  }
+  .frow .tt{
+    font-family:'Montserrat',Arial,sans-serif;
+    font-weight:700;
+    font-size:40px;
+    color:var(--accent-dark);
+    margin-bottom:6px;
+  }
+  .frow .ds{
+    font-family:'Roboto',Arial,sans-serif;
+    font-weight:400;
+    font-size:34px;
+    line-height:1.45;
+    color:var(--ink2);
+  }
+  .tip{
+    margin-top:6px;
+    display:flex;
+    gap:24px;
+    align-items:flex-start;
+    background:#F3E3D5;
+    border-radius:28px;
+    padding:30px 36px;
+  }
+  .tip .ic{ font-size:56px; flex:none; line-height:1; }
+  .tip p{
+    font-size:34px;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .tip p b{ color:var(--accent-dark); }
+
+  /* =========================================================
+     СТРАНИЦА 6 — CTA
+     ========================================================= */
+  .cta .photo{ height:340px; margin:28px 0 34px; }
+  .cta .intro{
+    font-family:'Roboto',Arial,sans-serif;
+    font-size:38px;
+    line-height:1.5;
+    color:var(--ink);
+    margin-bottom:26px;
+  }
+  .cta .intro b{ color:var(--accent-dark); }
+  .step{
+    display:flex;
+    align-items:flex-start;
+    gap:22px;
+    margin-bottom:22px;
+  }
+  .step .em{
+    font-size:52px;
+    line-height:1;
+    flex:none;
+    margin-top:4px;
+  }
+  .step .tx{
+    font-family:'Roboto',Arial,sans-serif;
+    font-size:37px;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .step .tx b{ font-weight:700; }
+  .btn{
+    margin-top:auto;
+    display:block;
+    background:var(--accent);
+    color:#fff;
+    text-decoration:none;
+    font-family:'Montserrat',Arial,sans-serif;
+    font-weight:700;
+    font-size:42px;
+    line-height:1.3;
+    letter-spacing:-0.3px;
+    border-radius:60px;
+    padding:34px 44px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 16px 38px rgba(198,123,92,.42), 0 8px 0 var(--accent-dark);
+    transform:translateY(0);
+    transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+  }
+  .btn:hover{
+    background:var(--accent-dark);
+    transform:translateY(-5px);
+    box-shadow:0 26px 46px rgba(198,123,92,.55), 0 12px 0 var(--accent-dark);
+  }
+  .btn:active{
+    transform:translateY(8px);
+    box-shadow:0 3px 8px rgba(198,123,92,.3), 0 2px 0 var(--accent-dark);
+  }
+  .btn .mini{
+    display:block;
+    font-family:'Roboto',Arial,sans-serif;
+    font-weight:400;
+    font-size:28px;
+    margin-top:8px;
+    opacity:.9;
+    letter-spacing:0;
+  }
+.chk .photo{height:230px;flex-shrink:0}.chk .card{padding:24px 30px;margin-bottom:20px;flex-shrink:0}.chk .card .q{font-size:38px}.chk .card .a{font-size:32px;line-height:1.45}
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     СТРАНИЦА 1 — ОБЛОЖКА
+================================================================ -->
+<section class="page cover">
+  <div class="ring"></div>
+  <div class="soft"></div>
+  <div class="kicker">Лид-магнит для уставших мам</div>
+
+  <h1>«Мам, а что на&nbsp;ужин?»&nbsp;—<br><span class="quo">больше не&nbsp;проблема.</span></h1>
+
+  <img class="photo" src="img_jpg/cover.jpg" alt="Телефон на кухонном столе с продуктами">
+
+  <p class="sub">Интерактивный чек-лист и&nbsp;шпаргалка, как накормить семью из&nbsp;того, что осталось в&nbsp;холодильнике. Без&nbsp;стресса и&nbsp;походов в&nbsp;магазин.</p>
+
+  <div class="cover-badge">6 страниц · просто · по-домашнему</div>
+</section>
+
+<!-- ================================================================
+     СТРАНИЦА 2 — ПРОБЛЕМА
+================================================================ -->
+<section class="page prob">
+  <div class="kicker">Проблема</div>
+  <h2>Знакомо это чувство?</h2>
+  <img class="photo" src="img_jpg/2.jpg" alt="Полупустой холодильник">
+  <p>Ты приходишь домой после работы. Впереди&nbsp;— проверка уроков, купание и&nbsp;укладывание. Сил стоять у&nbsp;плиты два часа нет. Открываешь холодильник: там половина кабачка, вчерашний рис и&nbsp;яйца. Мозг зависает. Проще всего заказать пиццу… но&nbsp;это опять удар по&nbsp;бюджету.</p>
+  <p><b class="accent">Давай договоримся:</b> ты не&nbsp;обязана быть шеф-поваром каждый день. Тебе нужен просто рабочий инструмент, который снимет с&nbsp;тебя эту головную боль.</p>
+</section>
+
+<!-- ================================================================
+     СТРАНИЦА 3 — ЧЕК-ЛИСТ
+================================================================ -->
+<section class="page chk">
+  <div class="kicker">Чек-лист</div>
+  <h2>«Скорая помощь для&nbsp;ужина»</h2>
+  <img class="photo" src="img_jpg/3.jpg" alt="Кабачок, яйца и сыр на деревянном столе">
+  <p class="intro">Сохраняй, чтобы не&nbsp;паниковать, когда времени в&nbsp;обрез:</p>
+
+  <div class="card">
+    <div class="q"><span class="ok">✅</span>Есть только овощи и&nbsp;яйца?</div>
+    <div class="a">Не&nbsp;делай скучную яичницу. Взбей яйца с&nbsp;молоком, залей любые овощи и&nbsp;посыпь сыром. Запеки в&nbsp;духовке 15&nbsp;минут&nbsp;— пока ты моешь руки, омлет-фриттата уже готов.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="ok">✅</span>Осталась варёная крупа (рис/гречка)?</div>
+    <div class="a">Сделай «ленивые ежики». Смешай кашу с&nbsp;фаршем (или яйцом и&nbsp;луком), скатай шарики и&nbsp;залей сметанно-томатным соусом. Дети обожают, пока ты отдыхаешь.</div>
+  </div>
+
+  <div class="card">
+    <div class="q"><span class="ok">✅</span>Курица или мясо кажутся сухими?</div>
+    <div class="a">Разбери на&nbsp;волокна и&nbsp;смешай с&nbsp;ложкой сметаны, чесноком и&nbsp;зеленью. Получится паштет-спред. Мажем на&nbsp;лаваш, добавляем огурец&nbsp;— и&nbsp;быстрые роллы готовы.</div>
+  </div>
+</section>
+
+<!-- ================================================================
+     СТРАНИЦА 4 — РЕЗУЛЬТАТ
+================================================================ -->
+<section class="page res">
+  <div class="kicker">Как это выглядит на практике</div>
+  <h2>Как это выглядит на&nbsp;практике?</h2>
+  <img class="photo" src="img_jpg/4.jpg" alt="Роллы из кабачка с яйцом и сыром на тарелке">
+  <p><b>Те самые</b> кабачок, яйца и&nbsp;сыр со&nbsp;Страницы&nbsp;3 превращаются в&nbsp;полноценный ужин из&nbsp;обычных продуктов.</p>
+  <p>Никакой сложной готовки. Просто нарежь, сверни, посыпь сыром и&nbsp;в&nbsp;духовку. Пока ты проверяешь уроки у&nbsp;старшего, ужин для&nbsp;всей семьи уже на&nbsp;столе.</p>
+  <div class="note">
+    <span class="ic">🕒</span>
+    <p>Чтобы повторить было просто — вернись к&nbsp;чек-листу на&nbsp;Странице&nbsp;3.</p>
+  </div>
+</section>
+
+<!-- ================================================================
+     СТРАНИЦА 5 — ФОРМУЛА СЫТОЙ ТАРЕЛКИ
+================================================================ -->
+<section class="page form">
+  <div class="kicker">Правило сытой тарелки</div>
+  <h2>Правило сытой тарелки</h2>
+  <img class="photo" src="img_jpg/6image5.jpg" alt="Тарелка с курицей, картофелем и салатом">
+  <p class="intro">Чтобы через час никто не&nbsp;просил «кусочек хлеба», собирай тарелку по&nbsp;правилу 3-х элементов:</p>
+
+  <div class="frow">
+    <span class="ic">🍗</span>
+    <div>
+      <div class="tt">Белок (яйца, творог, курица)</div>
+      <div class="ds">даёт чувство сытости</div>
+    </div>
+  </div>
+
+  <div class="frow">
+    <span class="ic">🍚</span>
+    <div>
+      <div class="tt">Углеводы (крупы, макароны, лаваш)</div>
+      <div class="ds">дают энергию</div>
+    </div>
+  </div>
+
+  <div class="frow">
+    <span class="ic">🥦</span>
+    <div>
+      <div class="tt">Клетчатка (овощи, зелень)</div>
+      <div class="ds">даёт объём</div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="ic">💡</span>
+    <p><b>Лайфхак для мам:</b> если дети не&nbsp;едят овощи, «прячь» их в&nbsp;соусы или запекай вместе с&nbsp;основным блюдом под&nbsp;сыром.</p>
+  </div>
+</section>
+
+<!-- ================================================================
+     СТРАНИЦА 6 — ПРИЗЫВ К ДЕЙСТВИЮ
+================================================================ -->
+<section class="page cta">
+  <div class="kicker">Следующий шаг</div>
+  <h2>Хватит гуглить рецепты на&nbsp;пятую вкладку.</h2>
+
+  <p class="intro">Я знаю, что после рабочего дня ты не&nbsp;хочешь читать лонгриды. Поэтому я создал <b>ВК-Бота Шеф-повара</b>. Он работает как твоя старшая сестра, которая всегда знает, что приготовить.</p>
+
+  <img class="photo" src="img_jpg/5image1.jpg" alt="Женская рука держит смартфон с чатом бота на экране">
+
+  <div class="step">
+    <span class="em">1️⃣</span>
+    <div class="tx">Ты пишешь боту: «У&nbsp;меня есть макароны, сосиски и&nbsp;помидор».</div>
+  </div>
+  <div class="step">
+    <span class="em">2️⃣</span>
+    <div class="tx">Бот выдаёт пошаговый рецепт из&nbsp;тех продуктов, которые ты&nbsp;назвала.</div>
+  </div>
+  <div class="step">
+    <span class="em">3️⃣</span>
+    <div class="tx">Ты просто следуешь шагам и&nbsp;звёшь семью к&nbsp;столу.</div>
+  </div>
+
+  <a class="btn" href="https://vk.ru/bot_shef">
+    🤖 Запустить бота и&nbsp;получить 3&nbsp;бесплатных рецепта
+    <span class="mini">нажми, чтобы начать готовить без стресса</span>
+  </a>
+</section>
+
+</body>
+</html>
